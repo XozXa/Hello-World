@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1">
+	<title>作业</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/grid-flex.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div class="main">
+		<header class="header-container">
+			<div class="container">
+				<div class="row">
+					<div class="header-logocode d-md-none">
+						imooc
+						<i id="header-logocode-btn" class="header-logocode-btn icon">&#xe641;</i>
+					</div>
+					<div class="header-dnav">
+						<a href="javascript:;" class="header-dnav-items">前端</a>
+						<a href="javascript:;" class="header-dnav-items">java</a>
+						<a href="javascript:;" class="header-dnav-items">ios</a>
+						<a href="javascript:;" class="header-dnav-items">Android</a>
+						<a href="javascript:;" class="header-dnav-items">php</a>
+					</div>
+					<div class="header-nav d-none d-md-block col-md-12">
+						<a href="javascript:;" class="header-nav-items header-nav-items_active">前端</a>
+						<a href="javascript:;" class="header-nav-items">java</a>
+						<a href="javascript:;" class="header-nav-items">ios</a>
+						<a href="javascript:;" class="header-nav-items">Android</a>
+						<a href="javascript:;" class="header-nav-items">php</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="main-img"></div>
+		<div class="main-name">IMOOC</div>
+		<div class="main-btn">start</div>
+	</div>
+	<div class="main2">
+		<div class="row">
+			<a href="javascript:;" class="main2-nav-items col-3">关于慕课网</a>
+			<a href="javascript:;" class="main2-nav-items col-3">关于课程</a>
+			<a href="javascript:;" class="main2-nav-items col-3">核心团队</a>
+			<a href="javascript:;" class="main2-nav-items col-3">新增专题</a>
+		</div>
+	</div>
+	<div class="main3">
+		<h2 class="main3-title">响应式</h2>
+		<p class="main3-p">
+			1.下载地址：https://browsersync.io
+			2.点击get started按钮安装，复制提示的地址，前面加为cnpm install -g browser-sync，使用快捷键window+r,输入cmd运行进入--黏贴地址回车安装
+			3.安装完成后，在文件所在文件夹按住shif键右键选择在此处打开命令窗口---也可使用快捷键window+r,输入cmd运行进入；输入cd 加上本地文件目录回车，再输入browser-sync start --server --files="*" 自动跳入命名为index.html的文件（http://localhost:3000/）
+			4.手机浏览器中输入IP地址例如192.168.1.7加上:3001则就进入了Browsersync
+			工具；pc端网页地址也许使用IP地址访问（同一网址），否则手机页面无法正常打开；
+			5.改变index文件内容，可在移动端时时更新
+			6. pc端的touch事件和移动端的touch事件存在兼容性问题， 所以无法同步。
+		</p>
+	</div>
+	<div class="main4">
+		<div class="row">
+			<i class="col-12 col-md-1">IMOOC</i>
+			<i class="col-12 col-md-11"> &nbsp;&nbsp;&nbsp;welcome to www.imooc.com &nbsp;&nbsp;&nbsp;</i>
+		</div>
+	</div>
+	<div class="main5">
+		<div class="container">
+			<h2 class="main5-title">主打课程</h2>
+			<div class="row">
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/1.jpg" alt=""></a>
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/2.jpg" alt=""></a>
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/3.jpg" alt=""></a>
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/4.jpg" alt=""></a>
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/5.jpg" alt=""></a>
+				<a href="javascript:;" class="main5-items col-6 col-md-4"><img src="img/6.jpg" alt=""></a>
+			</div>
+		</div>
+	</div>
+	<div class="main6">
+		Copyright &copy; 2017 imooc.com All Rights Reserved
+	</div>
+
+<script src="js/flexible.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script>
+	var kbtn=$('#header-logocode-btn'),
+		dnav=$('.header-dnav'),
+		items=$('.header-dnav-items'),
+		itemsH=$(items[0]).height(),
+		len=items.length,
+		isDnav=false;
+
+	kbtn.on('touchstart touchend',function(e){
+		if(e.type=='touchstart'){
+			console.log(e.type);
+			$(this).addClass('header-logocode-btn_active');
+		}
+		if(e.type=='touchend'&&!isDnav){
+			console.log(e.type);
+			$(this).removeClass('header-logocode-btn_active');			
+			dnav.height(itemsH*len);
+			isDnav=!isDnav;
+		}else if(e.type=='touchend'&&isDnav){
+			$(this).removeClass('header-logocode-btn_active');			
+			dnav.height(0);
+			isDnav=!isDnav;
+		}
+		e.stopPropagation();
+		
+	});
+	items.on('touchstart touchend',function(e){
+		if(e.type=='touchstart'){
+			items.removeClass('header-dnav-items_active');
+			$(this).addClass('header-dnav-items_active');
+		}
+		if(e.type=='touchend'){
+			$(this).removeClass('header-dnav-items_active');			
+		}
+		e.stopPropagation();
+		
+	});
+	$('body').on('touchend',function(e){	
+		if(isDnav){
+			dnav.height(0);
+			isDnav=!isDnav;
+		}
+	});
+
+	var btn=$('.main-btn');
+	btn.on('touchstart touchend',function(e){
+		if(e.type=='touchstart'){
+			$(this).addClass('main-btn_active');
+		}
+		if(e.type=='touchend'){
+			$(this).removeClass('main-btn_active');			
+		}
+		e.stopPropagation();
+		
+	});
+
+	var main2btn=$('.main2-nav-items');
+	main2btn.on('touchstart touchend',function(e){
+		if(e.type=='touchstart'){
+			main2btn.removeClass('main2-nav-items_active');
+			$(this).addClass('main2-nav-items_active');
+		}
+		e.stopPropagation();
+		
+	});
+
+
+	var headernav=$('.header-nav-items');
+	headernav.on('touchstart touchend',function(e){
+		if(e.type=='touchstart'){
+			headernav.removeClass('header-nav-items_active');
+			$(this).addClass('header-nav-items_active');
+		}
+		e.stopPropagation();
+		
+	});
+</script>
+</body> 
+</html>
